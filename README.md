@@ -1,12 +1,23 @@
 # Project 3: Spots
 
+Image sharing site.
+
 ## Description
+
+- This project is an image sharing site that was created using HTML, CSS, media queries, grid templates. There are multiple versions of the site depending on what size screen it is projected on. There is a desktop version and mobile version of this project/site.
 
 ## Tech Stack
 
 - HTML
 - CSS
 - Responsive Design
+- Flexbox
+
+## Deployment
+
+This webpage is deployed to GitHub Pages
+
+- [Deployment Link:](https://derickgarcia.github.io/se_project_spots/)
 
 ### Overview
 
