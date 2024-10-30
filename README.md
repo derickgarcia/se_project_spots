@@ -19,6 +19,10 @@ This webpage is deployed to GitHub Pages
 
 - [Deployment Link:](https://derickgarcia.github.io/se_project_spots/)
 
+## Project Video
+
+- [Video Link:](https://drive.google.com/file/d/1rh3gAaSoc2f_f_MXu5Op4ZOsiSuOrwYl/view)
+
 ### Overview
 
 - Intro

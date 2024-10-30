@@ -18,6 +18,7 @@
   font-family: Poppins, Arial, Helvetica, sans-serif;
   font-weight: 500;
   font-size: 20px;
+  max-width: 350px;
   line-height: 24px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -35,7 +36,6 @@
 }
 
 .card__like-btn:hover {
-  color: #212121;
   opacity: 100%;
 }
 
@@ -46,6 +46,6 @@
   .card__title {
     font-size: 16px;
     line-height: 16px;
-    width: 95px;
+    max-width: 250px;
   }
 }
