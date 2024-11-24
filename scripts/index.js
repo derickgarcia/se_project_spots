@@ -50,6 +50,7 @@ function getCardElement(data) {
 
   cardNameElement.textContent = data.name;
   cardImageElement.src = data.link;
+  cardImageElement.setAttribute("alt", data.name);
 
   return cardElement;
 }

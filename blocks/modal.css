@@ -29,7 +29,6 @@
 }
 
 .modal__close-btn {
-  background-image: url(../images/close.svg);
   position: absolute;
   top: 32px;
   right: 50px;
@@ -37,6 +36,15 @@
   height: 40px;
   border: none;
   background-color: transparent;
+}
+
+.modal__close-btn:hover .modal__close-icon {
+  cursor: pointer;
+  opacity: 100%;
+}
+
+.modal__close-icon {
+  border: #212121;
   opacity: 40%;
 }
 
@@ -58,6 +66,11 @@
   padding: 16px 12px;
   border-radius: 8px;
   border-color: rgba(33, 33, 33, 0.4);
+  cursor: pointer;
+}
+
+.modal__input:hover {
+  border-color: #212121;
 }
 
 .modal__submit-btn {
@@ -66,6 +79,10 @@
   background-color: #000;
   color: #fff;
   border-radius: 8px;
+}
+
+.modal__submit-btn:hover {
+  cursor: pointer;
 }
 
 @media screen and (max-width: 627px) {
