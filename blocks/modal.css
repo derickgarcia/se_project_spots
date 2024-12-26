@@ -11,11 +11,15 @@
   justify-content: center;
   padding: 0 20px;
   font-family: "Poppins";
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
   visibility: hidden;
 }
 
 .modal_opened {
   visibility: visible;
+  opacity: 1;
+  transition: opacity 0.3s ease-in;
 }
 
 .modal__container {
@@ -154,5 +158,15 @@
 
   .modal__submit-btn {
     width: 100%;
+  }
+
+  .modal__image {
+    max-width: fit-content;
+    border: 4px;
+  }
+
+  .modal__close-btn_type_preview {
+    top: 41px;
+    left: 510px;
   }
 }
