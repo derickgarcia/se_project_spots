@@ -71,10 +71,7 @@ function getCardElement(data) {
   });
 
   cardDeleteBtn.addEventListener("click", () => {
-    const deleteCard = cardDeleteBtn.closest(".card");
-    if (deleteCard) {
-      deleteCard.remove();
-    }
+    cardElement.remove();
   });
 
   cardImageElement.addEventListener("click", () => {
@@ -88,8 +85,6 @@ function getCardElement(data) {
 }
 
 function openModal(modal) {
-  editModalNameInput.value = profileName.textContent;
-  editModalDescriptionInput.value = profileDescription.textContent;
   modal.classList.add("modal_opened");
 }
 
@@ -109,11 +104,12 @@ function handleAddCardSubmit(evt) {
   const inputValues = { name: cardNameInput.value, link: "" };
   const cardEl = getCardElement(inputValues);
   cardsList.prepend(cardEl);
-  //cardsList.unshift(cardEl);
   closeModal(cardModal);
 }
 
 profileEditButton.addEventListener("click", () => {
+  editModalNameInput.value = profileName.textContent;
+  editModalDescriptionInput.value = profileDescription.textContent;
   openModal(editModal);
 });
 
