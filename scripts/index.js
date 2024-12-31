@@ -101,7 +101,7 @@ function handleEditFormSubmit(evt) {
 
 function handleAddCardSubmit(evt) {
   evt.preventDefault();
-  const inputValues = { name: cardNameInput.value, link: "" };
+  const inputValues = { name: cardNameInput.value, link: cardLinkInput.value };
   const cardEl = getCardElement(inputValues);
   cardsList.prepend(cardEl);
   closeModal(cardModal);

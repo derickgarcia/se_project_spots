@@ -37,6 +37,7 @@
   background-color: transparent;
   width: unset;
   overflow: unset;
+  position: relative;
 }
 
 .modal__image {
@@ -84,8 +85,8 @@
   background-position: center;
   width: 40px;
   height: 40px;
-  top: 10px;
-  left: calc(100% + 10px);
+  top: 0px;
+  right: -45.5px;
   opacity: 1;
   position: absolute;
 }
@@ -134,6 +135,11 @@
 }
 
 @media screen and (max-width: 320px) {
+  .modal__close-btn_type_preview {
+    top: -40px;
+    left: 250px;
+    position: absolute;
+  }
 }
 
 @media screen and (max-width: 627px) {
@@ -143,6 +149,11 @@
 
   .modal__container {
     padding: 12px;
+  }
+
+  .modal__container_type_preview {
+    max-width: 280px;
+    padding: unset;
   }
 
   .modal__title {
@@ -171,7 +182,8 @@
   }
 
   .modal__close-btn_type_preview {
-    top: 41px;
-    left: -12px;
+    top: -40px;
+    left: calc(100% - 30px);
+    position: absolute;
   }
 }
