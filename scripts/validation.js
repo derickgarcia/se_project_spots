@@ -13,7 +13,7 @@ const showInputError = (formEl, inputEl, errorMessage) => {
   inputEl.classList.add("modal__input_type_error");
 };
 
-const hideInputError = (formEl, inputEl) => {
+const hideInputError = (formEl, inputEl, config) => {
   const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
   errorMessageEl.textContent = "";
   inputEl.classList.remove("modal__input_type_error");
@@ -44,6 +44,12 @@ const toggleButtonState = (inputList, buttonEl, config) => {
 
 const disableButton = (buttonEl) => {
   buttonEl.disabled = true;
+};
+
+const resetValidation = (formEl, inputList, config) => {
+  inputList.classList((input) => {
+    hideInputError(formEl, input, config);
+  });
 };
 
 const setEventListeners = (formEl, config) => {
