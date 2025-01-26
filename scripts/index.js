@@ -87,14 +87,14 @@ function getCardElement(data) {
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
-  document.addEventListener("keydown", modalEscClose);
-  modal.addEventListener("mousedown", modalOverlayClose);
+  document.addEventListener("keydown", handleEscape);
+  modal.addEventListener("mousedown", handleOverlay);
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
-  document.removeEventListener("keydown", modalEscClose);
-  modal.removeEventListener("mousedown", modalOverlayClose);
+  document.removeEventListener("keydown", handleEscape);
+  modal.removeEventListener("mousedown", handleOverlay);
 }
 
 function handleEditFormSubmit(evt) {
@@ -110,9 +110,9 @@ function handleAddCardSubmit(evt) {
   const cardEl = getCardElement(inputValues);
   cardsList.prepend(cardEl);
   disableButton(cardSubmitBtn, settings);
-  disableButton(cardSubmitBtn, {
+  /*disableButton(cardSubmitBtn, {
     inactiveButtonClass: "modal__submit-btn_disabled",
-  });
+  });*/
   closeModal(cardModal);
 }
 
@@ -127,14 +127,14 @@ profileEditButton.addEventListener("click", () => {
   openModal(editModal);
 });
 
-function modalEscClose(evt) {
+function handleEscape(evt) {
   if (evt.key === "Escape") {
     const modal = document.querySelector(".modal_opened");
     closeModal(modal);
   }
 }
 
-function modalOverlayClose(evt) {
+function handleOverlay(evt) {
   if (evt.target.classList.contains("modal")) {
     closeModal(evt.target);
   }

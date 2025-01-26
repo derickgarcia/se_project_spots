@@ -38,12 +38,13 @@ const toggleButtonState = (inputList, buttonEl, config) => {
     disableButton(buttonEl, config);
   } else {
     buttonEl.disabled = false;
+    buttonEl.classList.remove(config.inactiveButtonClass);
   }
-  buttonEl.classList.remove("modal__submit-btn_disabled");
 };
 
-const disableButton = (buttonEl) => {
+const disableButton = (buttonEl, config) => {
   buttonEl.disabled = true;
+  buttonEl.classList.remove(config.inactiveButtonClass);
 };
 
 const resetValidation = (formEl, inputList, config) => {
