@@ -7,16 +7,16 @@ const settings = {
   errorClass: "modal__error_visible",
 };
 
-const showInputError = (formEl, inputEl, errorMessage) => {
+const showInputError = (formEl, inputEl, errorMessage, config) => {
   const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
   errorMessageEl.textContent = errorMessage;
-  inputEl.classList.add("modal__input_type_error");
+  inputEl.classList.add(config.inputErrorClass);
 };
 
 const hideInputError = (formEl, inputEl, config) => {
   const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
   errorMessageEl.textContent = "";
-  inputEl.classList.remove("modal__input_type_error");
+  inputEl.classList.remove(config.inputErrorClass);
 };
 
 const checkInputValidity = (formEl, inputEl) => {
