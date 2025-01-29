@@ -114,6 +114,7 @@ function handleAddCardSubmit(evt) {
     inactiveButtonClass: "modal__submit-btn_disabled",
   });*/
   closeModal(cardModal);
+  cardForm.reset();
 }
 
 profileEditButton.addEventListener("click", () => {

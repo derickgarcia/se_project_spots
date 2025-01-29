@@ -42,6 +42,7 @@
 
 .modal__image {
   object-fit: contain;
+  width: 100%;
   max-width: 80vw;
   max-height: 80vh;
   border-radius: 8px;
@@ -158,6 +159,10 @@
     top: -40px;
     left: 250px;
     position: absolute;
+  }
+
+  .modal__submit-btn:disabled {
+    max-width: 100%;
   }
 }
 
