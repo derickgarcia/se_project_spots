@@ -1,9 +1,15 @@
+import "./index.css";
 import {
   enableValidation,
   settings,
   resetValidation,
   disableButton,
-} from "./validation.js";
+} from "../scripts/validation.js";
+import logo from "../images/logo.svg";
+import avatar from "../images/avatar.jpg";
+import pencil from "../images/pencil.svg";
+import plus from "../images/plus.svg";
+import close from "../images/close.svg";
 
 const initialCards = [
   {
@@ -31,6 +37,17 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/6-photo-by-moritz-feldmann-from-pexels.jpg",
   },
 ];
+
+const imageLogo = document.getElementById("image-logo");
+imageLogo.src = logo;
+const imageAvatar = document.getElementById("image-avatar");
+imageAvatar.src = avatar;
+const imagePencil = document.getElementById("image-pencil");
+imagePencil.src = pencil;
+const imagePlus = document.getElementById("image-plus");
+imagePlus.src = plus;
+const imageClose = document.getElementById("image-close");
+imageClose.src = close;
 
 const profileEditButton = document.querySelector(".profile__edit-btn");
 const cardModalBtn = document.querySelector(".profile__add-btn");
