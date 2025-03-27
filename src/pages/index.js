@@ -40,33 +40,6 @@ const initialCards = [
   },
 ];
 
-const api = new Api({
-  baseUrl: "https://around-api.en.tripleten-services.com/v1",
-  headers: {
-    authorization: "779aff47-9f97-4f59-ab86-c412269b098c",
-    "Content-Type": "application/json",
-  },
-});
-
-//Destructure the second item in the callback of the .then()
-api
-  .getAppInfo()
-  .then(([cards]) => {
-    cards.forEach((item) => {
-      const cardEl = getCardElement(item);
-      cardsList.append(cardEl);
-    });
-    //Handle the user's info
-    // - set the src of the avatar image
-    // - set the textContent of both the text elements
-    imageAvatar.src = getUserInfo.this._baseUrl;
-    profileName.textContent = getUserInfo.name;
-    profileDescription.textContent = getUserInfo.description;
-  })
-  .catch((err) => {
-    console.error(err);
-  });
-
 const imageLogo = document.getElementById("image-logo");
 imageLogo.src = logo;
 const imageAvatar = document.getElementById("image-avatar");
@@ -79,6 +52,33 @@ const imageClose = document.getElementById("image-close");
 imageClose.src = close;
 const pencilLight = document.getElementById("pencil-light");
 pencilLight.src = pencilWhite;
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "779aff47-9f97-4f59-ab86-c412269b098c",
+    "Content-Type": "application/json",
+  },
+});
+
+//Destructure the second item in the callback of the .then()
+api
+  .getAppInfo()
+  .then(([cards, userInfo]) => {
+    cards.forEach((item) => {
+      const cardEl = getCardElement(item);
+      cardsList.append(cardEl);
+    });
+    //Handle the user's info
+    // - set the src of the avatar image
+    // - set the textContent of both the text elements
+    imageAvatar.src = userInfo.avatar;
+    profileName.textContent = userInfo.name;
+    profileDescription.textContent = userInfo.about;
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 const profileEditButton = document.querySelector(".profile__edit-btn");
 const cardModalBtn = document.querySelector(".profile__add-btn");
