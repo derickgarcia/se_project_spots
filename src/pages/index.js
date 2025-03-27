@@ -10,6 +10,8 @@ import avatar from "../images/avatar.jpg";
 import pencil from "../images/pencil.svg";
 import plus from "../images/plus.svg";
 import close from "../images/close.svg";
+import pencilWhite from "../images/pencil-light.svg";
+import Api from "../utils/Api.js";
 
 const initialCards = [
   {
@@ -38,6 +40,33 @@ const initialCards = [
   },
 ];
 
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "779aff47-9f97-4f59-ab86-c412269b098c",
+    "Content-Type": "application/json",
+  },
+});
+
+//Destructure the second item in the callback of the .then()
+api
+  .getAppInfo()
+  .then(([cards]) => {
+    cards.forEach((item) => {
+      const cardEl = getCardElement(item);
+      cardsList.append(cardEl);
+    });
+    //Handle the user's info
+    // - set the src of the avatar image
+    // - set the textContent of both the text elements
+    imageAvatar.src = getUserInfo.this._baseUrl;
+    profileName.textContent = getUserInfo.name;
+    profileDescription.textContent = getUserInfo.description;
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
 const imageLogo = document.getElementById("image-logo");
 imageLogo.src = logo;
 const imageAvatar = document.getElementById("image-avatar");
@@ -48,9 +77,12 @@ const imagePlus = document.getElementById("image-plus");
 imagePlus.src = plus;
 const imageClose = document.getElementById("image-close");
 imageClose.src = close;
+const pencilLight = document.getElementById("pencil-light");
+pencilLight.src = pencilWhite;
 
 const profileEditButton = document.querySelector(".profile__edit-btn");
 const cardModalBtn = document.querySelector(".profile__add-btn");
+const avatarModalBtn = document.querySelector(".profile__avatar-btn");
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
 
@@ -68,6 +100,16 @@ const cardSubmitBtn = cardModal.querySelector(".modal__submit-btn");
 const cardModalCloseBtn = cardModal.querySelector(".modal__close-btn");
 const cardNameInput = cardModal.querySelector("#add-card-name-input");
 const cardLinkInput = cardModal.querySelector("#add-card-link-input");
+
+//Avatar form
+const avatarModal = document.querySelector("#edit-avatar-modal");
+const avatarForm = avatarModal.querySelector(".modal__form");
+const avatarSubmitBtn = avatarModal.querySelector(".modal__submit-btn");
+const avatarModalCloseBtn = avatarModal.querySelector(".modal__close-btn");
+const avatarLinkInput = avatarModal.querySelector("#profile-avatar-input");
+
+//Delete form
+const deleteModal = document.querySelector("#delete-modal");
 
 const previewModal = document.querySelector("#preview-modal");
 const previewModalImage = previewModal.querySelector(".modal__image");
@@ -96,7 +138,8 @@ function getCardElement(data) {
   });
 
   cardDeleteBtn.addEventListener("click", () => {
-    cardElement.remove();
+    //cardElement.remove();
+    openModal(deleteModal);
   });
 
   cardImageElement.addEventListener("click", () => {
@@ -123,9 +166,18 @@ function closeModal(modal) {
 
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
-  profileName.textContent = editModalNameInput.value;
-  profileDescription.textContent = editModalDescriptionInput.value;
-  closeModal(editModal);
+  api
+    .editUserInfo({
+      name: editModalNameInput.value,
+      about: editModalDescriptionInput.value,
+    })
+    .then((data) => {
+      //TODO - Use data argument instead of the input values
+      profileName.textContent = editModalNameInput.value;
+      profileDescription.textContent = editModalDescriptionInput.value;
+      closeModal(editModal);
+    })
+    .catch(console.error);
 }
 
 function handleAddCardSubmit(evt) {
@@ -139,6 +191,19 @@ function handleAddCardSubmit(evt) {
   });*/
   closeModal(cardModal);
   cardForm.reset();
+}
+
+function handleAvatarSubmit(evt) {
+  evt.preventDefault();
+  api
+    .editAvatarInfo(avatarLinkInput.value)
+    .then((data) => {
+      //TODO - Use data argument instead of the input values
+      profileName.textContent = editModalNameInput.value;
+      profileDescription.textContent = editModalDescriptionInput.value;
+      closeModal(editModal);
+    })
+    .catch(console.error);
 }
 
 profileEditButton.addEventListener("click", () => {
@@ -177,6 +242,16 @@ cardModalCloseBtn.addEventListener("click", () => {
   closeModal(cardModal);
 });
 
+// Select avatar modal button
+avatarModalBtn.addEventListener("click", () => {
+  openModal(avatarModal);
+});
+avatarForm.addEventListener("submit", handleAvatarSubmit);
+
+avatarModalCloseBtn.addEventListener("click", () => {
+  closeModal(avatarModal);
+});
+
 previewModalClose.addEventListener("click", () => {
   closeModal(previewModal);
 });
@@ -189,9 +264,9 @@ cardForm.addEventListener("submit", handleAddCardSubmit);
 //  cardsList.prepend(cardElement);
 //}
 
-initialCards.forEach((item) => {
+/*initialCards.forEach((item) => {
   const cardEl = getCardElement(item);
   cardsList.append(cardEl);
-});
+});*/
 
 enableValidation(settings);
