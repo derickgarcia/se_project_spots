@@ -228,15 +228,25 @@ function handleEditFormSubmit(evt) {
 
 function handleAddCardSubmit(evt) {
   evt.preventDefault();
+
   const inputValues = { name: cardNameInput.value, link: cardLinkInput.value };
-  const cardEl = getCardElement(inputValues);
-  cardsList.prepend(cardEl);
-  disableButton(cardSubmitBtn, settings);
+
+  api
+    .createCards(inputValues)
+    .then((newCard) => {
+      const cardEl = getCardElemen(newCard);
+      cardsList.prepend(cardEl);
+
+      disableButton(cardSubmitBtn, settings);
+
+      closeModal(cardModal);
+      cardForm.reset();
+    })
+    .catch(console.error);
+
   /*disableButton(cardSubmitBtn, {
     inactiveButtonClass: "modal__submit-btn_disabled",
   });*/
-  closeModal(cardModal);
-  cardForm.reset();
 }
 
 function handleAvatarSubmit(evt) {

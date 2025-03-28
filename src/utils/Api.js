@@ -54,6 +54,18 @@ class Api {
   }
 
   //TODO - implement POST/cards
+  createCards(cardData) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify(cardData),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      Promise.reject(`Error: ${res.status}`);
+    });
+  }
 
   editAvatarInfo(avatar) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
