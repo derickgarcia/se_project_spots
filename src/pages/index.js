@@ -145,11 +145,18 @@ function handleDeleteSubmit(evt) {
 
 function handleLike(evt, id) {
   //1. check whether card is currently liked or not
-  //    const isLiked = ???;
+  const isLiked = evt.target.classList.contains("card__like-btn_liked");
   //2. call the changeLike methods, passing it to the appropriate arguments
   //3. handle the response (.then and .catch)
   //4. in the .then, toggle active class
-  evt.target.classList.toggle("card__like-btn_liked");
+  //evt.target.classList.toggle("card__like-btn_liked");
+  evt.preventDefault();
+  api
+    .changeLike(id, !isLiked)
+    .then(() => {
+      evt.target.classList.toggle("card__like-btn_liked");
+    })
+    .catch(console.error);
 }
 
 function getCardElement(data) {

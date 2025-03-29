@@ -40,6 +40,10 @@
   position: relative;
 }
 
+.modal__delete_container {
+  max-width: 630px;
+}
+
 .modal__image {
   object-fit: contain;
   width: 100%;
@@ -97,11 +101,27 @@
   opacity: 100%;
 }
 
+.modal__close_delete {
+  right: -50px;
+  top: 5px;
+}
+
 .modal__title {
   margin: 0 0 32px;
   font-weight: 500;
   font-size: 32px;
   line-height: 1;
+}
+
+.modal__delete_title {
+  text-align: center;
+  font-size: 24px;
+}
+
+.modal__delete_form {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
 }
 
 .modal__label {
@@ -152,6 +172,10 @@
 .modal__submit-btn:hover {
   cursor: pointer;
   background-color: #212121;
+}
+
+.modal__delete-btn {
+  background-color: #ff6565;
 }
 
 @media screen and (max-width: 320px) {
