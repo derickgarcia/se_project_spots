@@ -71,6 +71,7 @@
 .modal__close-btn {
   position: absolute;
   display: flex;
+  background-image: url("../images/close.svg");
   top: 30px;
   right: 50px;
   width: 40px;
