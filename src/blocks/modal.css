@@ -174,8 +174,22 @@
   background-color: #212121;
 }
 
+.modal__cancel-btn {
+  border: solid;
+  background: transparent;
+  color: #212121;
+}
+
+.modal__cancel-btn:hover {
+  color: #fff;
+}
+
 .modal__delete-btn {
   background-color: #ff6565;
+}
+
+.modal__delete-btn:hover {
+  background-color: #ff3333;
 }
 
 @media screen and (max-width: 320px) {
@@ -233,5 +247,13 @@
     top: -40px;
     left: calc(100% - 30px);
     position: absolute;
+  }
+
+  .modal__delete_form {
+    display: grid;
+    align-items: center;
+    gap: 12px;
+
+    justify-items: center;
   }
 }

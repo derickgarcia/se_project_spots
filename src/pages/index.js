@@ -10,6 +10,7 @@ import avatar from "../images/avatar.jpg";
 import pencil from "../images/pencil.svg";
 import plus from "../images/plus.svg";
 import close from "../images/close.svg";
+//import closeLight from "../images/close-light.svg";
 import pencilWhite from "../images/pencil-light.svg";
 import Api from "../utils/Api.js";
 import { setButtonText } from "../utils/helpers.js";
@@ -51,6 +52,8 @@ const imagePlus = document.getElementById("image-plus");
 imagePlus.src = plus;
 const imageClose = document.getElementById("image-close");
 imageClose.src = close;
+//const lightClose = document.getElementById("image-close");
+//lightClose.src = closeLight;
 const pencilLight = document.getElementById("pencil-light");
 pencilLight.src = pencilWhite;
 
@@ -132,6 +135,9 @@ function handleDeleteCard(cardElement, cardId) {
 
 function handleDeleteSubmit(evt) {
   evt.preventDefault();
+  const submitBtn = evt.submitter;
+  setButtonText(submitBtn, true, "Delete", "Deleting...");
+
   api
     .deleteCard(selectedCardId)
     .then(() => {
@@ -140,7 +146,10 @@ function handleDeleteSubmit(evt) {
       selectedCard.remove();
       closeModal(deleteModal);
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(() => {
+      setButtonText(submitBtn, false, "Delete", "Deleting...");
+    });
 }
 
 function handleLike(evt, id) {
@@ -150,7 +159,6 @@ function handleLike(evt, id) {
   //3. handle the response (.then and .catch)
   //4. in the .then, toggle active class
   //evt.target.classList.toggle("card__like-btn_liked");
-  evt.preventDefault();
   api
     .changeLike(id, !isLiked)
     .then(() => {
@@ -211,7 +219,6 @@ function handleEditFormSubmit(evt) {
 
   const submitBtn = evt.submitter;
   //submitBtn.textContent = "Saving...";
-  setButtonText(submitBtn, true);
 
   api
     .editUserInfo({
@@ -227,7 +234,7 @@ function handleEditFormSubmit(evt) {
     .catch(console.error)
     .finally(() => {
       //TODO - call setButtonText instead
-      submitBtn.textContent = "Save";
+      setButtonText(submitBtn, true, "Save", "Saving...");
     });
 }
 
@@ -237,11 +244,12 @@ function handleAddCardSubmit(evt) {
   evt.preventDefault();
 
   const inputValues = { name: cardNameInput.value, link: cardLinkInput.value };
+  const submitBtn = evt.submitter;
 
   api
     .createCards(inputValues)
     .then((newCard) => {
-      const cardEl = getCardElemen(newCard);
+      const cardEl = getCardElement(newCard);
       cardsList.prepend(cardEl);
 
       disableButton(cardSubmitBtn, settings);
@@ -249,7 +257,11 @@ function handleAddCardSubmit(evt) {
       closeModal(cardModal);
       cardForm.reset();
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(() => {
+      //TODO - call setButtonText instead
+      setButtonText(submitBtn, true, "Save", "Saving...");
+    });
 
   /*disableButton(cardSubmitBtn, {
     inactiveButtonClass: "modal__submit-btn_disabled",
