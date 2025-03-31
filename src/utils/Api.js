@@ -31,7 +31,6 @@ class Api {
         Promise.reject(`Error: ${res.status}`);
       })
       .then((info) => {
-        console.log(info);
         return info;
       });
   }

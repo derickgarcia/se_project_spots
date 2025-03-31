@@ -124,6 +124,10 @@
     visibility: visible;
   }
 
+  .profile__avatar-btn {
+    width: 80px;
+    height: 80px;
+  }
   .profile__avatar-btn::after {
     content: "";
   }

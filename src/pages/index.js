@@ -50,8 +50,8 @@ const imagePencil = document.getElementById("image-pencil");
 imagePencil.src = pencil;
 const imagePlus = document.getElementById("image-plus");
 imagePlus.src = plus;
-const imageClose = document.getElementById("image-close");
-imageClose.src = close;
+/*const imageClose = document.getElementById("image-close");
+imageClose.src = close;*/
 //const lightClose = document.getElementById("image-close");
 //lightClose.src = closeLight;
 const pencilLight = document.getElementById("pencil-light");
@@ -115,6 +115,7 @@ const avatarLinkInput = avatarModal.querySelector("#profile-avatar-input");
 //Delete form
 const deleteModal = document.querySelector("#delete-modal");
 const deleteForm = deleteModal.querySelector(".modal__form");
+const deleteCancel = deleteModal.querySelector(".modal__cancel-btn");
 
 const previewModal = document.querySelector("#preview-modal");
 const previewModalImage = previewModal.querySelector(".modal__image");
@@ -131,6 +132,10 @@ function handleDeleteCard(cardElement, cardId) {
   selectedCard = cardElement;
   selectedCardId = cardId;
   openModal(deleteModal);
+
+  deleteCancel.addEventListener("click", () => {
+    closeModal(deleteModal);
+  });
 }
 
 function handleDeleteSubmit(evt) {

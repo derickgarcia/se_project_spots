@@ -105,6 +105,7 @@
 .modal__close_delete {
   right: -50px;
   top: 5px;
+  background-image: url(../images/close-light.svg);
 }
 
 .modal__title {
