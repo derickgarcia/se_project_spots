@@ -131,18 +131,16 @@ const cardsList = document.querySelector(".cards__list");
 let selectedCard, selectedCardId;
 
 function handleDeleteCard(cardElement, cardId) {
-  //cardElement.remove();
   selectedCard = cardElement;
   selectedCardId = cardId;
   openModal(deleteModal);
-
-  deleteCancel.addEventListener("click", () => {
-    closeModal(deleteModal);
-  });
-  deleteClose.addEventListener("click", () => {
-    closeModal(deleteModal);
-  });
 }
+deleteCancel.addEventListener("click", () => {
+  closeModal(deleteModal);
+});
+deleteClose.addEventListener("click", () => {
+  closeModal(deleteModal);
+});
 
 function handleDeleteSubmit(evt) {
   evt.preventDefault();
@@ -186,6 +184,7 @@ function getCardElement(data) {
   const cardDeleteBtn = cardElement.querySelector(".card__delete-btn");
 
   //TODO - if the card is liked, set the active class to the card
+  //cardLikeBtn.classList.toggle("card__like-btn_liked");
 
   cardNameElement.textContent = data.name;
   cardImageElement.src = data.link;
@@ -226,6 +225,7 @@ function handleEditFormSubmit(evt) {
   evt.preventDefault();
 
   const submitBtn = evt.submitter;
+  setButtonText(submitBtn, true);
   //submitBtn.textContent = "Saving...";
 
   api
@@ -240,7 +240,7 @@ function handleEditFormSubmit(evt) {
     })
     .catch(console.error)
     .finally(() => {
-      setButtonText(submitBtn, true, "Save", "Saving...");
+      setButtonText(submitBtn, false);
     });
 }
 
@@ -251,6 +251,7 @@ function handleAddCardSubmit(evt) {
 
   const inputValues = { name: cardNameInput.value, link: cardLinkInput.value };
   const submitBtn = evt.submitter;
+  setButtonText(submitBtn, true);
 
   api
     .createCards(inputValues)
@@ -276,6 +277,9 @@ function handleAddCardSubmit(evt) {
 function handleAvatarSubmit(evt) {
   evt.preventDefault();
 
+  const submitBtn = evt.submitter;
+  setButtonText(submitBtn, true);
+
   api
     .editAvatarInfo(avatarLinkInput.value)
     .then((data) => {
@@ -285,7 +289,10 @@ function handleAvatarSubmit(evt) {
       imageAvatar.src = data.avatar;
       closeModal(editModal);
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(() => {
+      setButtonText(submitBtn, false);
+    });
 }
 
 profileEditButton.addEventListener("click", () => {
