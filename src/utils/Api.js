@@ -78,6 +78,7 @@ class Api {
       if (res.ok) {
         return res.json();
       }
+      console.log(avatar);
       Promise.reject(`Error: ${res.status}`);
     });
   }

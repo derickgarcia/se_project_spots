@@ -338,6 +338,10 @@ avatarModalCloseBtn.addEventListener("click", () => {
   closeModal(avatarModal);
 });
 
+avatarSubmitBtn.addEventListener("click", () => {
+  closeModal(avatarModal);
+});
+
 deleteForm.addEventListener("submit", handleDeleteSubmit);
 
 previewModalClose.addEventListener("click", () => {
