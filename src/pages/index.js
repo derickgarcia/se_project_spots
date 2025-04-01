@@ -89,6 +89,7 @@ const cardModalBtn = document.querySelector(".profile__add-btn");
 const avatarModalBtn = document.querySelector(".profile__avatar-btn");
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
+const profileAvatar = document.querySelector(".profile__avatar");
 
 const editModal = document.querySelector("#edit-profile-modal");
 const editFormElement = editModal.querySelector(".modal__form");
@@ -98,6 +99,7 @@ const editModalDescriptionInput = editModal.querySelector(
   "#profile-description-input"
 );
 
+//Cards
 const cardModal = document.querySelector("#add-card-modal");
 const cardForm = cardModal.querySelector(".modal__form");
 const cardSubmitBtn = cardModal.querySelector(".modal__submit-btn");
@@ -150,8 +152,6 @@ function handleDeleteSubmit(evt) {
   api
     .deleteCard(selectedCardId)
     .then(() => {
-      // remove the card from the DOM
-      // close the modal
       selectedCard.remove();
       closeModal(deleteModal);
     })
@@ -167,7 +167,6 @@ function handleLike(evt, id) {
   //2. call the changeLike methods, passing it to the appropriate arguments
   //3. handle the response (.then and .catch)
   //4. in the .then, toggle active class
-  //evt.target.classList.toggle("card__like-btn_liked");
   api
     .changeLike(id, !isLiked)
     .then(() => {
@@ -235,14 +234,12 @@ function handleEditFormSubmit(evt) {
       about: editModalDescriptionInput.value,
     })
     .then((data) => {
-      //TODO - Use data argument instead of the input values
-      profileName.textContent = editModalNameInput.value;
-      profileDescription.textContent = editModalDescriptionInput.value;
+      profileName.textContent = data.name;
+      profileDescription.textContent = data.about;
       closeModal(editModal);
     })
     .catch(console.error)
     .finally(() => {
-      //TODO - call setButtonText instead
       setButtonText(submitBtn, true, "Save", "Saving...");
     });
 }
@@ -268,7 +265,6 @@ function handleAddCardSubmit(evt) {
     })
     .catch(console.error)
     .finally(() => {
-      //TODO - call setButtonText instead
       setButtonText(submitBtn, true, "Save", "Saving...");
     });
 
@@ -279,12 +275,14 @@ function handleAddCardSubmit(evt) {
 
 function handleAvatarSubmit(evt) {
   evt.preventDefault();
+
   api
     .editAvatarInfo(avatarLinkInput.value)
     .then((data) => {
       //TODO - Use data argument instead of the input values
-      profileName.textContent = editModalNameInput.value;
-      profileDescription.textContent = editModalDescriptionInput.value;
+      profileName.textContent = data.name; //editModalNameInput.value;
+      profileDescription.textContent = data.about; //editModalDescriptionInput.value;
+      imageAvatar.src = data.avatar;
       closeModal(editModal);
     })
     .catch(console.error);
@@ -345,11 +343,6 @@ deleteForm.addEventListener("submit", handleDeleteSubmit);
 previewModalClose.addEventListener("click", () => {
   closeModal(previewModal);
 });
-
-//for (let i = 0; i < initialCards.length; i++) {
-//  const cardElement = getCardElement(initialCards[i]);
-//  cardsList.prepend(cardElement);
-//}
 
 /*initialCards.forEach((item) => {
   const cardEl = getCardElement(item);
