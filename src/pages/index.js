@@ -161,12 +161,13 @@ function handleDeleteSubmit(evt) {
 
 function handleLike(evt, id) {
   //1. check whether card is currently liked or not
-  const isLiked = evt.target.classList.contains("card__like-btn_liked");
   //2. call the changeLike methods, passing it to the appropriate arguments
   //3. handle the response (.then and .catch)
   //4. in the .then, toggle active class
+  const isLiked = evt.target.classList.contains("card__like-btn_liked");
+
   api
-    .changeLike(id, !isLiked)
+    .changeLike(id, isLiked)
     .then(() => {
       evt.target.classList.toggle("card__like-btn_liked");
     })
@@ -184,7 +185,9 @@ function getCardElement(data) {
   const cardDeleteBtn = cardElement.querySelector(".card__delete-btn");
 
   //TODO - if the card is liked, set the active class to the card
-  //cardLikeBtn.classList.toggle("card__like-btn_liked");
+  if (data.isLiked) {
+    cardLikeBtn.classList.add("card__like-btn_liked");
+  }
 
   cardNameElement.textContent = data.name;
   cardImageElement.src = data.link;
@@ -236,7 +239,10 @@ function handleEditFormSubmit(evt) {
     .then((data) => {
       profileName.textContent = data.name;
       profileDescription.textContent = data.about;
+
       closeModal(editModal);
+      editFormElement.reset();
+      disableButton(submitBtn, false);
     })
     .catch(console.error)
     .finally(() => {
@@ -266,7 +272,7 @@ function handleAddCardSubmit(evt) {
     })
     .catch(console.error)
     .finally(() => {
-      setButtonText(submitBtn, true, "Save", "Saving...");
+      setButtonText(submitBtn, false);
     });
 
   /*disableButton(cardSubmitBtn, {

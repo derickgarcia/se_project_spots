@@ -230,6 +230,11 @@
     right: 12px;
   }
 
+  .modal__close_delete {
+    top: -40px;
+    right: 0px;
+  }
+
   .modal__label {
     margin-bottom: 24px;
   }
