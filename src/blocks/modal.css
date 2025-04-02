@@ -243,6 +243,14 @@
     width: 100%;
   }
 
+  .modal__delete-btn {
+    width: 156px;
+  }
+
+  .modal__cancel-btn {
+    width: 156px;
+  }
+
   .modal__image {
     width: 100%;
     max-width: none;

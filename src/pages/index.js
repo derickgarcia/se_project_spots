@@ -242,7 +242,7 @@ function handleEditFormSubmit(evt) {
 
       closeModal(editModal);
       editFormElement.reset();
-      disableButton(submitBtn, false);
+      disableButton(submitBtn, settings);
     })
     .catch(console.error)
     .finally(() => {
